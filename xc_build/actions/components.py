@@ -106,6 +106,8 @@ class ComponentsAction(XCBuildAction):
 		return 0
 
 	def _show(self, args: argparse.Namespace) -> int:
+		sh_all: bool = args.all
+
 		tree = Tree(
 			'[bold]XC-Build Components[/]',
 			guide_style = 'blue'
@@ -114,10 +116,14 @@ class ComponentsAction(XCBuildAction):
 		for name, details in self.components.items():
 			node = tree.add(f'[green]{name}[/] (latest: [cyan]{details["latest"]}[/])')
 			node.add(f'URL: {details["url"]}')
-			versions = node.add('Versions')
-			for v in details['versions']:
-				have = _cmp_dl_path(name, v['version'], details['filename']).exists()
-				versions.add(f'{v["version"]: <8}{" - Downloaded" if have else ""}')
+			if sh_all:
+				versions = node.add('Versions')
+				for v in details['versions']:
+					have = _cmp_dl_path(name, v['version'], details['filename']).exists()
+					versions.add(f'{v["version"]: <8}{" - Downloaded" if have else ""}')
+			else:
+				have = _cmp_dl_path(name, details['latest'], details['filename']).exists()
+				node.add(f'Downloaded: { "✔️" if have else "✖️"}')
 
 		print(tree)
 
@@ -192,6 +198,13 @@ class ComponentsAction(XCBuildAction):
 		sh_action = subactions.add_parser(
 			'show',
 			help = 'List components and versions, and if they are downloaded or not'
+		)
+
+		sh_action.add_argument(
+			'--all', '-a',
+			action  = 'store_true',
+			default = False,
+			help    = 'Show all versions, not just the latest'
 		)
 
 		rm_action = subactions.add_parser(

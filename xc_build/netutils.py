@@ -29,8 +29,8 @@ def download_files(
 	)
 
 	def _download(
-		task, url: str, dest: Path, clobber: bool = False, checksum: Optional[str] = None
-	) -> tuple[int, bool]:
+		task: pb.TaskID, url: str, dest: Path, clobber: bool = False, checksum: Optional[str] = None
+	) -> tuple[pb.TaskID, bool]:
 		if dest.exists() and not clobber:
 			log.info(f'Already have {dest}, skipping')
 			return True

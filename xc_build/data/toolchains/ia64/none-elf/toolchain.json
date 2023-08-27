@@ -1,0 +1,53 @@
+{
+	"$schema": "https://raw.githubusercontent.com/lethalbit/xc-build/main/contrib/schemas/toolchain.schema.json",
+	"version": 1,
+	"enabled": true,
+	"properties": {
+		"lto": true,
+		"linker_hash": "gnu"
+	},
+	"components": {
+		"binutils": {
+			"build": true,
+			"flags": {
+				"configure": []
+			}
+		},
+		"gdb": {
+			"build": true,
+			"flags": {
+				"configure": []
+			}
+		},
+		"gcc": {
+			"build": true,
+			"flags": {
+				"configure": []
+			}
+		},
+		"glibc": {
+			"build": true,
+			"flags": {
+				"configure": []
+			}
+		},
+		"ulibc": {
+			"build": true,
+			"flags": {
+				"configure": []
+			}
+		},
+		"newlibc": {
+			"build": true,
+			"flags": {
+				"configure": []
+			}
+		},
+		"linux": {
+			"build": true,
+			"flags": {
+				"configure": []
+			}
+		}
+	}
+}

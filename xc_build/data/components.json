@@ -1,0 +1,373 @@
+{
+	"$schema": "https://raw.githubusercontent.com/lethalbit/xc-build/main/contrib/schemas/components.schema.json",
+	"version": 1,
+	"components": {
+		"gmp": {
+			"url": "https://gmplib.org/download/gmp",
+			"filename": "gmp-${VERSION}.tar.xz",
+			"latest": "6.3.0",
+			"versions": [
+				{ "version": "5.0.0", "sha512sum": "cd60678fe12ad51f98be2996540ea9c1174ec034d0563fda28a02eabf924975d4eaa63ca9662babdeec1f08765a29630d86f71a23d19d0d7643a4e25d3f823b3" },
+				{ "version": "5.0.1", "sha512sum": "ebc76732ecec80e39e332f785e6dfa0a123791c79c33840b1a394de64881aa6ead61733615ca14f8536b787e5c9cc3ca737bf0246d1045de60635ca9ff5d50ac" },
+				{ "version": "5.0.2", "sha512sum": "c40568509b4fd53b7697469f3fc7fa39c8e08924ea9d17578ee6b474bc01acfd7f102bad6468fcd3e49c1d097289ef19ba5213016855d3ed4f412a3914539281" },
+				{ "version": "5.0.3", "sha512sum": "dc68ad36bbf515386d735784fe4583443eb6168d10c2967e47ce4bd541076a18c01bcc4b04261330ee0489560978234c36bf7064d611ce2f21ac38c37e6b34f0" },
+				{ "version": "5.0.4", "sha512sum": "68e2eca72aa8bdf4dd83da55625c32488015c10ea8aed79c8b861070de99bad0bb44b78c32655c12df90802bde564f98f41e8bffa1a1f522f3432271a8fcb00c" },
+				{ "version": "5.0.5", "sha512sum": "79f69ed7959af18e626d4b21b5707ebd7701261ebc2cc9f78fa03c5efa9eb1c1aef2ba8728cdbc34fb09ba333aeba0f88ba7e4d87d6a93b21f936f9d8ee1174a" },
+				{ "version": "5.1.0", "sha512sum": "33b364bddfe829c78e3720ad15dc9fe5cf4c774e9a206ae0a8467666872d40148da07b8a4d8b251e3240c3c8b4eee5e082edc13aa208d3912f9f5d600d1110e8" },
+				{ "version": "5.1.1", "sha512sum": "4cc3307411eb2144e87b791ee2f52e0020711638f911dfa3cc5929a57eda5ac7d9ca10c1c0bb75c96afc7ff7a9c6ad165bc87409b036c562867b4e5da15ba571" },
+				{ "version": "5.1.2", "sha512sum": "2c135bb6be908e93e63fe8828b2128b4e22e8ba29adf3cc917493ab66b42d54654dad7f101f902105e854731a69a202c38e34f119f642828fa5568ef21075c5a" },
+				{ "version": "5.1.3", "sha512sum": "44bbec2b2a6480d4c9a9a633cca4fe0de966c13bc08bdcd8b934d81e21f3dfacaecf273f149dc613d365277d280ecee43cffdafaec1bd1239a7ed903f8658b5b" },
+				{ "version": "6.0.0", "sha512sum": "ca52e19f14ce7fe2f4d0a847fbdf9e822fe99e5b82712496ede3537ded21db5ab175cb5187cd6fe996bebe3c6f37b54a4a5604b46d5a7e4dfbe580b1d38bc707" },
+				{ "version": "6.1.0", "sha512sum": "3647f07914e6c01b28d94f2d9783e50b0ca9f742a694f56d5759e79a057143ded578b71707ff909c6b0f5710862974606461608e73b33af3114b5338670d8630" },
+				{ "version": "6.1.1", "sha512sum": "6ead5fdf15891e0c47b094351497a052cc691973f09c60a8322546418eb615bddb180a93fd7846b88b096b5644cb9d375eab2a4a07af64399f5159eccf3edee2" },
+				{ "version": "6.1.2", "sha512sum": "9f098281c0593b76ee174b722936952671fab1dae353ce3ed436a31fe2bc9d542eca752353f6645b7077c1f395ab4fdd355c58e08e2a801368f1375690eee2c6" },
+				{ "version": "6.2.0", "sha512sum": "a066f0456f0314a1359f553c49fc2587e484ff8ac390ff88537266a146ea373f97a1c0ba24608bf6756f4eab11c9056f103c8deb99e5b57741b4f7f0ec44b90c" },
+				{ "version": "6.2.1", "sha512sum": "c99be0950a1d05a0297d65641dd35b75b74466f7bf03c9e8a99895a3b2f9a0856cd17887738fa51cf7499781b65c049769271cbcb77d057d2e9f1ec52e07dd84" },
+				{ "version": "6.3.0", "sha512sum": "e85a0dab5195889948a3462189f0e0598d331d3457612e2d3350799dba2e244316d256f8161df5219538eb003e4b5343f989aaa00f96321559063ed8c8f29fd2" }
+			],
+			"flags": {
+				"latest": {
+					"configure": [
+						"--prefix=${COMMON_PREFIX}"
+					],
+					"ld_library_path": [],
+					"ldflags": [],
+					"ldflags_build": [],
+					"cflags": [],
+					"cxxflags": []
+				}
+			}
+		},
+		"mpfr": {
+			"url": "https://ftp.gnu.org/gnu/mpfr",
+			"filename": "mpfr-${VERSION}.tar.xz",
+			"latest": "4.2.1",
+			"versions": [
+				{ "version": "3.0.0", "sha512sum": "ee0295b3d3c6a1514bb4f137a3b84758f4948484c24dcfffca1b1ae1043428c282f989e2b572d66c0834b3f72c5a88d73057019a425fb41675c2b87b5433fcee" },
+				{ "version": "3.0.1", "sha512sum": "a025e70bff2f0b8e2d5c93f147a04c66ae40fa6595613671495eeb2a93ad720098826a634fa2255432de3e98ef8d3c0a7ef2ee461b006bf0ab0c0d39858b7a85" },
+				{ "version": "3.1.0", "sha512sum": "24fe6ff3a824c3276b16cf6547771b95c782dfaed389596c1c94ca3992fbd0c14fcfd0c02cd96e8f11174aa585d029c946b05c9560eb31086f1ef68e72fba96e" },
+				{ "version": "3.1.1", "sha512sum": "4fcc87e19a08622b3211a33807e708b78da6c8659f391003703a9e170c485f56e6ebfff48d42afca7b4edb14fd9487684c4d8fd6c9f805ed62b6d5259d5721a8" },
+				{ "version": "3.1.2", "sha512sum": "8d594206afb2637ed39ad564d42c8c4d02b042b95925f5c6ec891e5cb87f7155195559c7ff477256a088ecaaa3c2b0d35a9d11a74ed526a1080d49b2950e5587" },
+				{ "version": "3.1.3", "sha512sum": "79846fd82974269aa48152c2b6dbcb2321130dc4d0f0ba2eb94d56619b177add9b2077ebf88b4382c56db19c4215910e5a252f216715c1eee40baa299da42eb4" },
+				{ "version": "3.1.4", "sha512sum": "4ef61708834efdea6b85258f46f1b25ce1c55b912f44b117d8c3d5e06d8f1177e50f627d9736f3289bd159c5bb10c80e09d1ad9f6f52c4ff43c3496034b04232" },
+				{ "version": "3.1.5", "sha512sum": "3643469b9099b31e41d6ec9158196cd1c30894030c8864ee5b1b1e91b488bccbf7c263c951b03fe9f4ae6f9d29279e157a7dfed0885467d875f107a3d964f032" },
+				{ "version": "3.1.6", "sha512sum": "746ee74d5026f267f74ab352d850ed30ff627d530aa840c71b24793e44875f8503946bd7399905dea2b2dd5744326254d7889337fe94cfe58d03c4066e9d8054" },
+				{ "version": "4.0.0", "sha512sum": "9c9c4535f33fffd2126d1c290e5eeda7cd2804219244643f09c9a2d2acfa3d410d2cb1e4a7bb77cd86cffc2fac59c7f5d32c9910317cac37dbca474ab6d63808" },
+				{ "version": "4.0.1", "sha512sum": "137ad68bc1e33a155edc1247fcdba27f999cf48ed526773136584090ddf2cfdfc9ea79fbf74ea1943b835b4b1ff29b05087114738c6ad3b485848540f30cac4f" },
+				{ "version": "4.0.2", "sha512sum": "d583555d08863bf36c89b289ae26bae353d9a31f08ee3894520992d2c26e5683c4c9c193d7ad139632f71c0a476d85ea76182702a98bf08dde7b6f65a54f8b88" },
+				{ "version": "4.1.0", "sha512sum": "1bd1c349741a6529dfa53af4f0da8d49254b164ece8a46928cdb13a99460285622d57fe6f68cef19c6727b3f9daa25ddb3d7d65c201c8f387e421c7f7bee6273" },
+				{ "version": "4.1.1", "sha512sum": "be468749bd88870dec37be35e544983a8fb7bda638eb9414c37334b9d553099ea2aa067045f51ae2c8ab86d852ef833e18161d173e414af0928e9a438c9b91f1" },
+				{ "version": "4.2.0", "sha512sum": "58e843125884ca58837ae5159cd4092af09e8f21931a2efd19c15de057c9d1dc0753ae95c592e2ce59a727fbc491af776db8b00a055320413cdcf2033b90505c" },
+				{ "version": "4.2.1", "sha512sum": "bc68c0d755d5446403644833ecbb07e37360beca45f474297b5d5c40926df1efc3e2067eecffdf253f946288bcca39ca89b0613f545d46a9e767d1d4cf358475" }
+			],
+			"flags": {
+				"latest": {
+					"configure": [
+						"--prefix=${COMMON_PREFIX}", "${WITH_GMP}"
+					],
+					"ld_library_path": [
+						"${COMMON_PREFIX}/lib"
+					],
+					"ldflags": [
+						"-Wl,-rpath,${COMMON_PREFIX}/lib"
+					],
+					"ldflags_build": [],
+					"cflags": [],
+					"cxxflags": []
+				}
+			}
+		},
+		"mpc": {
+			"url": "https://ftp.gnu.org/gnu/mpc",
+			"filename": "mpc-${VERSION}.tar.gz",
+			"latest": "1.3.1",
+			"versions": [
+				{ "version": "1.0.1", "sha512sum": "fa381e75999bba626ba08d73225285b03c6d2f6cca87881b28829925d1624eaed1c9b544f75e7281cf5d8dcdd7831025a4eafc05f88f13375f9e08239a8a9303" },
+				{ "version": "1.0.2", "sha512sum": "0e94ba9a20c7374839d2a53a9ed8cce647cc74142b464634fdb9cbaf96e91e43ea13f0b4dab5c06c247e6719de0c0ae03fdcba0c7c4518ee504c545c96da70d0" },
+				{ "version": "1.0.3", "sha512sum": "0028b76df130720c1fad7de937a0d041224806ce5ef76589f19c7b49d956071a683e2f20d154c192a231e69756b19e48208f2889b0c13950ceb7b3cfaf059a43" },
+				{ "version": "1.1.0", "sha512sum": "72d657958b07c7812dc9c7cbae093118ce0e454c68a585bfb0e2fa559f1bf7c5f49b93906f580ab3f1073e5b595d23c6494d4d76b765d16dde857a18dd239628" },
+				{ "version": "1.2.0", "sha512sum": "84fa3338f51d369111456a63ad040256a1beb70699e21e2a932c779aa1c3bd08b201412c1659ecbb58403ea0548faacc35996d94f88f0639549269b7563c61b7" },
+				{ "version": "1.2.1", "sha512sum": "3279f813ab37f47fdcc800e4ac5f306417d07f539593ca715876e43e04896e1d5bceccfb288ef2908a3f24b760747d0dbd0392a24b9b341bc3e12082e5c836ee" },
+				{ "version": "1.3.0", "sha512sum": "9c18b24f7542dc1dc5e10cf58fd242e73d79a9dc3619c3f08d52aed75ad0e7d9e2ba2c46857717c8b921b084af2efc8c0d2d7173081af764b81c24a8971ddd9a" },
+				{ "version": "1.3.1", "sha512sum": "4bab4ef6076f8c5dfdc99d810b51108ced61ea2942ba0c1c932d624360a5473df20d32b300fc76f2ba4aa2a97e1f275c9fd494a1ba9f07c4cb2ad7ceaeb1ae97" }
+			],
+			"flags": {
+				"latest": {
+					"configure": [
+						"--prefix=${COMMON_PREFIX}", "${WITH_GMP}", "${WITH_MPFR}"
+					],
+					"ld_library_path": [
+						"${COMMON_PREFIX}/lib"
+					],
+					"ldflags": [
+						"-Wl,-rpath,${COMMON_PREFIX}/lib"
+					],
+					"ldflags_build": [],
+					"cflags": [],
+					"cxxflags": []
+				}
+			}
+		},
+		"binutils": {
+			"url": "https://ftp.gnu.org/gnu/binutils",
+			"filename": "binutils-${VERSION}.tar.xz",
+			"latest": "2.41",
+			"versions": [
+				{"version": "2.30",   "sha512sum": "e747ea20d8d79fcd21b9d9f6695059caa7189d60f19256da398e34b789fea9a133c32b192e9693b5828d27683739b0198431bf8b3e39fb3b04884cf89d9aa839" },
+				{"version": "2.31.1", "sha512sum": "0fca326feb1d5f5fe505a827b20237fe3ec9c13eaf7ec7e35847fd71184f605ba1cefe1314b1b8f8a29c0aa9d88162849ee1c1a3e70c2f7407d88339b17edb30" },
+				{"version": "2.31",   "sha512sum": "3448a71c42d790569c1159c1042aa520b2d8ac8af7506fb1f2a4199dfb13b39f1c2271a5cb3a643d10c7d8a388a73f190e90503d4793a016da7893473aa1c635" },
+				{"version": "2.32",   "sha512sum": "d326408f12a03d9a61a9de56584c2af12f81c2e50d2d7e835d51565df8314df01575724afa1e43bd0db45cfc9916b41519b67dfce03232aa4978704492a6994a" },
+				{"version": "2.33.1", "sha512sum": "b7a6767c6c7ca6b5cafa7080e6820b7bb3a53b7148348c438d99905defbdf0d30c9744a484ee01c9441a8153901808513366b15ba9533e20c9673c262ade36ac" },
+				{"version": "2.34",   "sha512sum": "2c7976939dcf5e8c5b7374cccd39bfe803b1bec73c6abfa0eb17c24e1942574c6bdb874c66a092a82adc443182eacd8a5a8001c19a76101f0c7ba40c27de0bbd" },
+				{"version": "2.35.1", "sha512sum": "94ff72708403413b70b247f3af4099ebaa882b6659249869f1ed9941a0f1912e313f08357d470f9fd2359e7f5e5b0eb86285e5eaf883fa8187789d6b1bd304eb" },
+				{"version": "2.35.2", "sha512sum": "9974ede5978d32e0d68fef23da48fa00bd06b0bff7ec45b00ca075c126d6bbe0cf2defc03ecc3f17bc6cc85b64271a13009c4049d7ba17de26e84e3a6e2c0348" },
+				{"version": "2.35",   "sha512sum": "9f222e4ab6720036402d03904fb11b73ab87714b85cd84997f7d357f405c7e10581d70202f9165a1ee0c70538632db27ecc9dfe627dddb1e6bc7edb1537cf786" },
+				{"version": "2.36.1", "sha512sum": "cc24590bcead10b90763386b6f96bb027d7594c659c2d95174a6352e8b98465a50ec3e4088d0da038428abe059bbc4ae5f37b269f31a40fc048072c8a234f4e9" },
+				{"version": "2.36",   "sha512sum": "0b89b70d4ad5cfe5bd0011dc7e342ae9de96efdbfc3442a0d6b5f7660e38bbcad36f2c72ba8f074323f02bde022ff1cd723ae99f0ea55cf94ee2dbbc0e4efdb2" },
+				{"version": "2.37",   "sha512sum": "5c11aeef6935860a6819ed3a3c93371f052e52b4bdc5033da36037c1544d013b7f12cb8d561ec954fe7469a68f1b66f1a3cd53d5a3af7293635a90d69edd15e7" },
+				{"version": "2.38",   "sha512sum": "8bf0b0d193c9c010e0518ee2b2e5a830898af206510992483b427477ed178396cd210235e85fd7bd99a96fc6d5eedbeccbd48317a10f752b7336ada8b2bb826d" },
+				{"version": "2.39",   "sha512sum": "68e038f339a8c21faa19a57bbc447a51c817f47c2e06d740847c6e9cc3396c025d35d5369fa8c3f8b70414757c89f0e577939ddc0d70f283182504920f53b0a3" },
+				{"version": "2.40",   "sha512sum": "a37e042523bc46494d99d5637c3f3d8f9956d9477b748b3b1f6d7dfbb8d968ed52c932e88a4e946c6f77b8f48f1e1b360ca54c3d298f17193f3b4963472f6925" },
+				{"version": "2.41",   "sha512sum": "5df45d0bd6ddabdce4f35878c041e46a92deef01e7dea5facc97fd65cc06b59abc6fba0eb454b68e571c7e14038dc823fe7f2263843e6e627b7444eaf0fe9374" }
+			],
+			"flags": {
+				"latest": {
+					"configure": [
+						"--prefix=${PREFIX}",
+						"${WITH_GMP}", "${WITH_MPFR}", "${WITH_MPC}",
+						"--disable-shared",     "--enable-host-shared",        "--enable-64-bit-bfd",
+						"--enable-static",      "--enable-lto",                "--with-sysroot=${SYSROOT}",
+						"--with-system-zlib",   "--disable-install-libiberty", "--enable-plugins",
+						"--enable-gold",        "--enable-ld",                 "--enable-deterministic-archives",
+						"--with-pic",           "--enable-cet"
+					],
+					"ld_library_path": [
+						"${PREFIX}/lib"
+					],
+					"ldflags": [
+						"-Wl,-rpath,${PREFIX}/lib"
+					],
+					"cflags": [],
+					"cxxflags": []
+				}
+			}
+		},
+		"gdb": {
+			"url": "https://ftp.gnu.org/gnu/gdb",
+			"filename": "gdb-${VERSION}.tar.xz",
+			"latest": "13.2",
+			"versions": [
+				{ "version": "10.1",  "sha512sum": "0dc54380435c6853db60f1e388b94836d294dfa9ad7f518385a27db4edd03cb970f8717d5f1e9c9a0d4a33d7fcf91bc2e5d6c9cf9e4b561dcc74e65b806c1537" },
+				{ "version": "10.2",  "sha512sum": "3653762ac008e065c37cd641653184c9ff7ce51ee2222ade1122bec9d6cc64dffd4fb74888ef11ac1942064a08910e96b7865112ad37f4602eb0a16bed074caa" },
+				{ "version": "11.1",  "sha512sum": "c40bf970e2f7c2107b29c5aa6a7150daa709d75ddadb73ac20742419d4637d158e3063a4c6ff6e47fae8ca8e1d36253973f85ea15445d004be6d5d7a2dd9bd46" },
+				{ "version": "11.2",  "sha512sum": "07e9026423438049b11f4f784d57401ece4e940570f613bd6958b3714fe7fbc2c048470bcce3e7d7d9f93331cdf3881d30dcc964cb113a071143a02b28e5b127" },
+				{ "version": "12.1",  "sha512sum": "425568d2e84672177d0fb87b1ad7daafdde097648d605e30cf0656970f66adc6a82ca2d83375ea4be583e9683a340e5bfdf5819668ddf66728200141ae50ff2d" },
+				{ "version": "13.1",  "sha512sum": "e65054ffbc0357eeed4b17e1edc5ef45aa73c9ddf3b1210651e3d859576e27c1d27b266800fe26328eda58857455ccd8632f4000cfc5f63f90854096290187ca" },
+				{ "version": "13.2",  "sha512sum": "8185d3e11ab60dafff5860a5016577bfe7dd7547ef01ebc867bc247603d82b74ff74c4f29492c7d2aee57076f52be33e289f4c6b414a4b870d4b3004909f4c34" },
+				{ "version": "8.0.1", "sha512sum": "5eb328910033f0918058be2f92caebf1e8dfc6caa3c730d99d621627e53de3c1b43761c2f683d53555893253c2f06768cbf56cdea051a3d291ffb6cfae87b5e1" },
+				{ "version": "8.0",   "sha512sum": "e4044bdd162cbf95044ec1eaa44d2fa62a33e051bdbbacbc97afd4dfb07bae1bea514381fc1966aede89d6796ef2377a15748a93d95e2ad494c8497db489e886" },
+				{ "version": "8.1.1", "sha512sum": "7dcd5e8c90de92f577834d887b5f54edb93a07083bfe661bc46c270a6cc4919f0b348e7e2fe8ae4511298a570ef150eeefdc667ef7cf527f0cf60943177ab6c9" },
+				{ "version": "8.1",   "sha512sum": "ffd82f415d7652d62dad1716c307836f594217a363429609beb7d70239e8bf06b73b393345b0e000796228e56681ed7656ac3c8be05e91d6d652ab0d5b1dc357" },
+				{ "version": "8.2.1", "sha512sum": "2aa81cfd389bb48c35d7d9f95cc10e88b4f7ad4597bdde0f8f1fd312f60f10d9fb2cc6e5a9355227d89ff328f7feb0fc411a69394560cafeb9fa75d35d896d11" },
+				{ "version": "8.2",   "sha512sum": "11cc481bebc51eb6db73249ecb62b8c07455cf3db169f4860b3a83114849fbd2b5860a2db64488ba6c5909cf07b255c04770f1e36059eae6bee16d2a3581be90" },
+				{ "version": "8.3.1", "sha512sum": "9053a2dc6b9eb921907afbc4cecc75d635aa76df5e8c4f0e5824ccf57cb206b299c19b127fff000b65c334826ff8304a54ff6098428365a8e997cca886c39e9a" },
+				{ "version": "8.3",   "sha512sum": "47ac074d20a09a3fac8f4a41dce0a0cbe6ef702f7dc21ba8b7d650d306128dcae481e9a16bf65e596b3a541dc82ae57c02bcbb786d551b4ef3e2917b9b6f0ae1" },
+				{ "version": "9.1",   "sha512sum": "84cdd408d80a3fc5779de459c5b26154d31b329ebde7e3aa78799fb1eb245d8b64b8c8ee7242382a1dbd95b4e6f9d84fef41d12a0646aa75d3dee4709ea1f6e7" },
+				{ "version": "9.2",   "sha512sum": "73635f00f343117aa5e2436f1e1597099e2bfb31ef7bb162b273fa1ea282c3fa9b0f52762e70bfc7ad0334addb8d159e9ac7cbe5998ca4f755ea8cf90714d274" }
+			],
+			"flags": {
+				"latest": {
+					"configure": [
+						"--prefix=${PREFIX}",
+						"--with-gmp=${PREFIX}", "--with-mpfr=${PREFIX}",     "--with-mpc=${PREFIX}",
+						"--disable-shared",     "--enable-static",           "--enable-lto",
+						"--with-python",        "--with-sysroot=${SYSROOT}", "--with-system-zlib",
+						"--disable-binutils",   "--disable-ld",              "--disable-gold",
+						"--disable-gas",        "--disable-sim",             "--disable-gprof",
+						"--disable-install-libiberty"
+					],
+					"ld_library_path": [
+						"${PREFIX}/lib"
+					],
+					"ldflags": [
+						"-Wl,-rpath,${PREFIX}/lib"
+					],
+					"ldflags_build": [],
+					"cflags": [],
+					"cxxflags": []
+				}
+			}
+		},
+		"gcc": {
+			"url": "https://ftp.gnu.org/gnu/gcc/gcc-${VERSION}",
+			"filename": "gcc-${VERSION}.tar.xz",
+			"latest": "13.2.0",
+			"versions": [
+				{ "version": "13.2.0", "sha512sum": "d99e4826a70db04504467e349e9fbaedaa5870766cda7c5cab50cdebedc4be755ebca5b789e1232a34a20be1a0b60097de9280efe47bdb71c73251e30b0862a2" },
+				{ "version": "13.1.0", "sha512sum": "6cf06dfc48f57f5e67f7efe3248019329a14d690c728d9f2f7ef5fa0d58f1816f309586ba7ea2eac20d0b60a2d1b701f68392e9067dd46f827ba0efd7192db33" },
+				{ "version": "12.2.0", "sha512sum": "e9e857bd81bf7a370307d6848c81b2f5403db8c7b5207f54bce3f3faac3bde63445684092c2bc1a2427cddb6f7746496d9fbbef05fbbd77f2810b2998f1f9173" },
+				{ "version": "12.1.0", "sha512sum": "2121d295292814a6761edf1fba08c5f633ebe16f52b80e7b73a91050e71e1d2ed98bf17eebad263e191879561c02b48906c53faa4c4670c486a26fc75df23900" },
+				{ "version": "11.3.0", "sha512sum": "f0be5ad705c73b84477128a69c047f57dd47002f375eb60e1e842e08cf2009a509e92152bca345823926d550b7395ae6d4de7db51d1ee371c2dc37313881fca7" },
+				{ "version": "11.2.0", "sha512sum": "d53a0a966230895c54f01aea38696f818817b505f1e2bfa65e508753fcd01b2aedb4a61434f41f3a2ddbbd9f41384b96153c684ded3f0fa97c82758d9de5c7cf" },
+				{ "version": "11.1.0", "sha512sum": "fd6bba0f67ff48069d03073d1a9b5e896383b1cfc9dde008e868e60a9ec5014a837d56af0ecbf467b3fb9b37ec74a676e819a18b44393a0a3c4280175b5d7ad8" },
+				{ "version": "10.3.0", "sha512sum": "2b2dd7453d48a398c29eaebd1422b70341001b8c90a62aee51e83344e7fdd8a8e45f82a4a9165bd7edc76dada912c932f4b6632c5636760fec4c5d7e402b3f86" },
+				{ "version": "10.2.0", "sha512sum": "42ae38928bd2e8183af445da34220964eb690b675b1892bbeb7cd5bb62be499011ec9a93397dba5e2fb681afadfc6f2767d03b9035b44ba9be807187ae6dc65e" },
+				{ "version": "10.1.0", "sha512sum": "0cb2a74c793face751f42bc580960b00e2bfea785872a0a2155f1f1dbfaa248f9591b67f4322db0f096f8844aca9243bc02732bda106c3b6e43b02bb67eb3096" }
+			],
+			"flags": {
+				"latest": {
+					"configure": [],
+					"ld_library_path": [],
+					"ldflags": [],
+					"ldflags_build": [],
+					"cflags": [],
+					"cxxflags": []
+				}
+			}
+		},
+		"linux": {
+			"url": "https://cdn.kernel.org/pub/linux/kernel/v${VERSION:0:1}.x",
+			"filename": "linux-${VERSION}.tar.xz",
+			"latest": "6.4.12",
+			"versions": [
+				{ "version": "6.4.12", "sha512sum": "6758994ac1f8bdec1848d9c90e7f66847512567e5de71fdcdde42487043ff83ea4745f9a2e2631046faff3c5d74a69e9413fdd78126f881cefd05e9efc652cd6" },
+				{ "version": "6.4.11", "sha512sum": "b3abf1d7c6b03644ddfc0a1994c88abd9b6db71089aeb4ff8749e9eed5d3772bc3468eabdeec99d998ec091898e5c81a84ef839345ba368580509500a3cc73dd" },
+				{ "version": "6.4.10", "sha512sum": "578caa6c7fbc22fa6d8b5a9f30edf315501b2888952bf7beeed8fdcf996131dbf17e5342eab376b6842ea6ead54163d85fb520b2b84285709e41a5941e3dc1ed" },
+				{ "version": "6.3.13", "sha512sum": "850f56587c49c7ad3e4873a4b9d8160b0b015ac00dbe272d3fd4b661d18a6e73d1d9dea69376fa002d47b195648c617ef0143a54cdf3bf7c361f0b90cc262e16" },
+				{ "version": "6.3.12", "sha512sum": "e98b272f4722aa72219c63380276231e3497ec0f2ebc42b68c63f9721f19099b0abb2b67bbb590fcd5e3f58744ea196722cbe20675841c8d753c055a16097154" },
+				{ "version": "6.3.11", "sha512sum": "79911b71ea96eb98d37a27c3293a48ac1d858526292882a15cdfa6e29cfc21ee56aa1b6e5ff860b1da5346fb4e672764891fc4e4c2e0f663d70f25d70ba8d011" },
+				{ "version": "6.2.16", "sha512sum": "7f98d8ee2417272e2ab1517f6b7150f74033622e24a9426fc924c75aea46ab22b8ec8c73fc2523378fdb80f8899a3c6a55036a20dd30e438c1d6d39ea036f2c3" },
+				{ "version": "6.2.15", "sha512sum": "6e98257946424fd5d511ff7cb9f18a09c228a3be4bff3b06a82e2b7afb5881342314014cd7cdb4a42101ff836ff23930cf6b2d8589bc4651d3d7bbd651a2439d" },
+				{ "version": "6.2.14", "sha512sum": "39fe2e687614886618ec94b133cd05394541fc423ec9f7e7e8b59a866a30984ac0ad4393b8264b1cd58c62d44019edf336a02c82adaaca4813ed57f33f22fa03" },
+				{ "version": "6.1.48", "sha512sum": "edc8d9017bed9fbf3817fe5a907cd31e58ea76b9d9570016023181ec91f0183ff2eae2ba4887c44756b016b43181ec3e1d658777c95540de694db0525ea9b9a1" },
+				{ "version": "6.1.47", "sha512sum": "2c559ae816532815d5aaafdf3f9e7a6a36e03252ef87d0fd5f6c6391eea618338bcddde7bfe6839d741db0121b93c733baa1d3b7547cefbe8ffb7cb76f72f1a2" },
+				{ "version": "6.1.46", "sha512sum": "677d524974f76aeaaddab158e13df7c820e92f6e3c74683f5cd3dc9923859982079cd1da3fb41d3e87f96d72fb0abbc92d662122898e0a79adc7c8eebf005bd5" },
+				{ "version": "6.1.45", "sha512sum": "9a30afa4dbbf899aab8722574a3b914b2547beb0b36a7d80bd45f694f1649e974c6769700d3b5494bbd71964ba4f6b1ab430588266a08a38bc940871bb963e81" },
+				{ "version": "6.0.19", "sha512sum": "4a7d9af032aac53e6474b49d29297d5c20fb5f16391042646a0100ed6b6308d24f088572b110b6fe2a741800a161006e795835aea7a874735f036aa0457163d7" },
+				{ "version": "6.0.18", "sha512sum": "4fe661ec730e2907af25b26e30f1d11f0865e6c95da47ef9e95df496b84fc932af1321e86ce97059a23bd7d8d9381008b1e1b7e581f956295cd467ad13ffc0d3" },
+				{ "version": "6.0.17", "sha512sum": "48e65a9296c795c80d44cda9f0facb06aa23bf1069ec6051525c79eb7ced8beac31242cafc4899022891c3f48a163800dbc86f0cbae27bd9e900b803370d001b" }
+			],
+			"flags": {
+				"latest": {
+					"configure": [],
+					"ld_library_path": [],
+					"ldflags": [],
+					"ldflags_build": [],
+					"cflags": [],
+					"cxxflags": []
+				}
+			}
+		},
+		"glibc": {
+			"url": "https://ftp.gnu.org/gnu/glibc",
+			"filename": "glibc-${VERSION}.tar.xz",
+			"latest": "2.38",
+			"versions": [
+				{ "version": "2.38", "sha512sum": "a6dd5e42dcd63d58e2820c783522c8c895890b6e8c8e6c83b025553de0cc77cdf227e7044e431ead98c89c68a9ce4dd63509b47e647775fb2075f011849c1900" },
+				{ "version": "2.37", "sha512sum": "4fc5932f206bb1b8b54828a28af1a681616b838bbab60c81c82155f3629cbfe1301d271af65511ed917f4c6949a025429221fe6035753282f15346919f15b90c" },
+				{ "version": "2.36", "sha512sum": "9ea0bbda32f83a85b7da0c34f169607fb8a102f0a11a914e6bf531be47d1bef4f5307128286cffa1e2dc5879f0e6ccaef527dd353486883fa332a0b44bde8b3e" },
+				{ "version": "2.35", "sha512sum": "e7336ce27561be5d7c217832a1136fb327e057bd8d3f92925b35c97e3e9f9e486948b5a1e03e5e4090772ef06437a074d10b82e68f17f1ad8f22077ee39e1b66" },
+				{ "version": "2.34", "sha512sum": "15252affd9ef4523a8001db16d497f4fdcb3ddf4cde7fe80e075df0bd3cc6524dc29fbe20229dbf5f97af580556e6b1fac0de321a5fe25322bc3e72f93beb624" },
+				{ "version": "2.33", "sha512sum": "4cb5777b68b22b746cc51669e0e9282b43c83f6944e42656e6db7195ebb68f2f9260f130fdeb4e3cfc64efae4f58d96c43d388f52be1eb024ca448084684abdb" },
+				{ "version": "2.32", "sha512sum": "8460c155b7003e04f18dabece4ed9ad77445fa2288a7dc08e80a8fc4c418828af29e0649951bd71a54ea2ad2d4da7570aafd9bdfe4a37e9951b772b442afe50b" },
+				{ "version": "2.31", "sha512sum": "735e4c0ef10418b6ea945ad3906585e5bbd8b282d76f2131309dce4cec6b15066a5e4a3731773ce428a819b542579c9957867bb0abf05ed2030983fca4412306" },
+				{ "version": "2.30", "sha512sum": "37483990cd653685873e96c45dd1651b32b441b6d7919a68ebe3bae31a0c3f7ce183fc9b110f0b268b353f80312f18370559a1e7aecea0e5aa755c8f2aef1d6b" },
+				{ "version": "2.29", "sha512sum": "146bc0769fe853d9edbf93cea7f74c5b3d84d69cb7614c62588e7acdecd1ec789a9d8949f3e8b99f8f36f2ccac740a003bed94f32b07817baf780b06cfeb6ed0" },
+				{ "version": "2.28", "sha512sum": "521f820953ff07c69ece4c2186f59fc061a7f9747932cd70ef2995c2b2deee76eeb6de700d85071cdca5949179aa8ccee75eda7feca1394121ec7b821ad0a3f3" },
+				{ "version": "2.27", "sha512sum": "7c5581154487d38d173ce1feb944e60207139cca148bccf066eaae322c0c2d219423bdcfa15c7f9be1b5e45dfc43c641cc5d80d3c3c65837d08a83cdb4e2a147" },
+				{ "version": "2.26", "sha512sum": "6ed368523bc55f00976f96c5177f114e3f714b27273d7bffc252812c8b98fb81970403c1f5b5f0a61da678811532fb446530745492d2b49bfefc0d5bd71ce8c0" },
+				{ "version": "2.25", "sha512sum": "5b7a2418d5b8a1b6a907c6c7fb6477ee2a473151cb45e03d0d4cdd9a33497c90b1ee39e2e7e885e2b25743dcd3747336ef114b4a73eb001da1fd79f29e0f9a6e" },
+				{ "version": "2.24", "sha512sum": "a4cb28a2c51a0cc029ed69da7cba11931a615ba897235590b4f7fad2eaabec9042f8250eaac2a5860997437a69ab13304f10a634000e52c0336b5593b7969adb" }
+			],
+			"flags": {
+				"latest": {
+					"configure": [],
+					"ld_library_path": [],
+					"ldflags": [],
+					"ldflags_build": [],
+					"cflags": [],
+					"cxxflags": []
+				}
+			}
+		},
+		"ulibc": {
+			"url": "https://www.uclibc.org/downloads",
+			"filename": "uClibc-${VERSION}.tar.xz",
+			"latest": "0.9.33.2",
+			"versions": [
+				{ "version": "0.9.33.2", "sha512sum": "5884c3ed1c0f3dd32fbcc4336fbfe4636439322ed944130c48d6272d894f2f806ce9917c87250b4e04c41fa19b6633b777e0a8548792d10571413464483b8326" },
+				{ "version": "0.9.33.1", "sha512sum": "e63a6e3467608e365f279f4a0b0a8e5a4045462959622f6dbe8b9aff4f59c9573f5070ed86bb288f0585d98a05768be9bc00d079578ba9c851f4fe6fbd2976fc" },
+				{ "version": "0.9.33",   "sha512sum": "6ef6b144cb83171b4afd45d71480e5b9f24f317c0141b401c8199e07083f6a04afb4e57b532f01aceb974485846bc4b6322690d372e3507e4b04e42e93ba3a25" },
+				{ "version": "0.9.32.1", "sha512sum": "a132c1eafc66278315bbbd947f00088a92e422799220c58603749badd4f5add438a1cd57dce31fb6a1846378a511caa79ce3149b97c2a0dbf08826f75a4cc346" },
+				{ "version": "0.9.32",   "sha512sum": "244a203f5ad1dbbf7b74db28be451f96ee75004726e46782a95974927444d748fc392d89ae5f58be7ff5725ecc705f5f25e5cb9ad9445b9ddf8341aaf930c920" },
+				{ "version": "0.9.31.1", "sha512sum": "63113e3abbe2297aa4aeea2a6f7451a3305b83c2c57b7ea1fb97a2286426e3583230980a46bd8eacf9788a88c3a53d8232c77ab2d3dbe73c8ff649aeb88fddde" },
+				{ "version": "0.9.31",   "sha512sum": "08261930201e9ac6b6070951b5abc18bc028762cf7c0ca8af5f7e2c151cad120edcddd7a81d38b0950637de26a04ab0fb05cacb4eb77e68d14958b780c83b6f4" },
+				{ "version": "0.9.30.3", "sha512sum": "c380b5f889565cde10bf218a27822a1709a4c88341b63f05338dcbd221a221a35e2b5b6ac9934b7d7ee1497bb88795e025f8629ed9c05760517887808ac4646b" },
+				{ "version": "0.9.30.2", "sha512sum": "8d95b883ebfcd61d72af21cfb23fc5cee1119a458ade8cbe6e3c04e657025251b9db61d63bfdf5f4b828cff66c0c3d170fe809214e1b9f6a9c460ea4f65bc1db" }
+			],
+			"flags": {
+				"latest": {
+					"configure": [],
+					"ld_library_path": [],
+					"ldflags": [],
+					"ldflags_build": [],
+					"cflags": [],
+					"cxxflags": []
+				}
+			}
+		},
+		"newlib": {
+			"url": "https://sourceware.org/pub/newlib",
+			"filename": "newlib-${VERSION}.tar.gz",
+			"latest": "4.3.0.20230120",
+			"versions": [
+				{ "version": "4.3.0.20230120", "sha512sum": "4a06309d36c2255fef8fc8f2d133cafa850f1ed2eddfb27b5d45f5d16af69e0fca829a0b4c9b34af4ed3a28c6fcc929761e0ee823a4229f35c2853d432b5e7ef" },
+				{ "version": "4.2.0.20211231", "sha512sum": "0c3efd7b74a6b8457a717cbb6aa6c5ff268eeaba375535465c6bd6502c3d32b54a9bc3ba7f2c6990f78e29152eee2f62acb39b674d24f9ddf440374a1ec9d2e8" },
+				{ "version": "4.1.0", "sha512sum": "6a24b64bb8136e4cd9d21b8720a36f87a34397fd952520af66903e183455c5cf19bb0ee4607c12a05d139c6c59382263383cb62c461a839f969d23d3bc4b1d34" },
+				{ "version": "4.0.0", "sha512sum": "15786bdba2ea6252409b0e3a11046d6315c7629df3b0ee37f0aa2e119c3f356d04e4da6ad2b5dc90de218cc35008f144d7bc986f6b24d95e8868e1848a9ca970" },
+				{ "version": "3.3.0", "sha512sum": "2f0c6666487520e1a0af0b6935431f85d2359e27ded0d01d02567d0d1c6479f2f0e6bbc60405e88e46b92c2a18780a01a60fc9281f7e311cfd40b8d5881d629c" },
+				{ "version": "3.2.0", "sha512sum": "8265d8f08333301a26632b4468b6fd30a33d1e85e9e0b40ad60916089839ea722dcccd87142c7fbcaaf0aacbc9d2b97f5f13a06fe6a512f5951bfc52aa07498d" },
+				{ "version": "3.1.0", "sha512sum": "efc4c3ab7153387780d141386bca5d3e20c9d25ae3e6b87cf94c8df9d301ce5926dacdff9bd33aeb9781559d933c3d0ae77f4e5b46120d90792f75dbfde702c7" },
+				{ "version": "3.0.0", "sha512sum": "d4730ce9a4fc4e62052e89d20d4a3855a103b3d1a2818e94c7a68626db285aa8db8e56a684103731916bfba3e581db88e3a93264034ea0f2880ee8976283c04f" },
+				{ "version": "2.5.0", "sha512sum": "4c99e8dfcb4a7ad0769b9e173ff06628d82e4993ef87d3adf9d6b5578626b14de81b4b3c5f0673ddbb49dc9f3d3628f9f8d4432dcded91f5cd3d27b7d44343cd" },
+				{ "version": "2.4.0", "sha512sum": "c60665e793dce2368a5baf23560beb50f641e1831854d702d1d7629fb6e9200cf814527f29796792a3d2dff81afee4255723df99ceb0732f99dd9580a17d2ac0" },
+				{ "version": "2.3.0", "sha512sum": "9002a0475fdb38541e78048709006926655c726e93e823b84e2dbf5b53fd539a5342e7266447d23db0e5528e27a19961b115b180c94f2272ff124c7e5c8304e7" },
+				{ "version": "2.2.0", "sha512sum": "ab9161f16845367c823b6709e3c5708969f29f05c77edb1cf969ff4202f358648f1e55080974599dcefed2fbced4694dc73748596e76c1aa37c50cddff6e4be3" },
+				{ "version": "2.1.0", "sha512sum": "6770864f9307abb2401a4e48f286845d3a4afc30b2ac987da4b964a5485cc3823b32d06a0abf61528e93c4ad8a3a0aa3cc1ecd3b033850e6b2bde6d9bbc9a547" },
+				{ "version": "2.0.0", "sha512sum": "539cc6e3854a52a7871a822e35563ff0dff7124b667fd9471150b9c56f556c0bcc526dfb5503aba5160a5fb61955a3d0876df639374727d2a444b08f90dbf233" }
+			],
+			"flags": {
+				"latest": {
+					"configure": [],
+					"ld_library_path": [],
+					"ldflags": [],
+					"ldflags_build": [],
+					"cflags": [],
+					"cxxflags": []
+				}
+			}
+		},
+		"avr-libc": {
+			"url": "https://download.savannah.gnu.org/releases/avr-libc",
+			"filename": "avr-libc-${VERSION}.tar.bz2",
+			"latest": "2.1.0",
+			"versions": [
+				{ "version": "2.1.0", "sha512sum": "207b8844353c45172cc819cd5e694bbfe7cd281359cd01cff520f1e70226852d708f1a4fc2e841b2ceb8e3f7d19f2ce45a3f499aee4a25eeb5f6f0aa919611c8" },
+				{ "version": "2.0.0", "sha512sum": "fc8d062043d633350dbe05978935dcb8028257a4f1013f246af9658aef0671def19ac11577d1ee9302df68df1b8cf030b22441d96852e185db212263aacabea6" },
+				{ "version": "1.8.1", "sha512sum": "9827028117d63bab9071bc0af68ef87038ed1e6e6c5cfd6db2c77a8387ce5b9eb2825c651405ad2842d81bc0abe173b76340b56671b930fc42d2f05bb7f261f7" }
+			],
+			"flags": {
+				"latest": {
+					"configure": [
+						"--prefix=${PREFIX}", "--enable-device-lib"
+					],
+					"ld_library_path": [],
+					"ldflags": [],
+					"ldflags_build": [],
+					"cflags": [],
+					"cxxflags": []
+				}
+			}
+		}
+	}
+}

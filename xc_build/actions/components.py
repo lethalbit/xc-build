@@ -3,15 +3,14 @@
 import argparse
 import tarfile
 import logging   as log
-
 from pathlib     import Path
-from typing      import Optional
 
 from rich        import print
 from rich.tree   import Tree
 
 from .           import XCBuildAction
 from ..strutils  import expand_variables
+from ..netutils  import download_files
 from ..data      import get_components
 from ..config    import (
 	XC_BUILD_CONFIG,
@@ -22,49 +21,6 @@ from ..config    import (
 __all__ = (
 	'ComponentsAction',
 )
-
-def _download_file(url: str, dest: Path, checksum: Optional[str] = None) -> bool:
-	from hashlib import sha512
-	import requests
-	import rich.progress as pb
-
-	if dest.exists():
-		log.info(f'Already have {dest}, skipping')
-		return True
-
-	with pb.Progress(
-		pb.TextColumn('Downloading [bold blue]{task.fields[filename]: <23}', justify = 'left'),
-		pb.BarColumn(),
-		'[progress.percentage]{task.percentage:>3.1f}%',
-		' ',
-		pb.DownloadColumn(),
-		' ',
-		pb.TransferSpeedColumn(),
-		' ',
-		pb.TimeRemainingColumn()
-	) as progress:
-		with requests.get(url, allow_redirects = True) as r:
-			task = progress.add_task('download', filename = f'{dest.parent.name}/{dest.name}', start = True)
-			h = sha512()
-			progress.update(task, total = int(r.headers['Content-length']))
-			with open(dest, 'wb') as f:
-				progress.start_task(task)
-				for chunk in r.iter_content(chunk_size = 8192):
-					f.write(chunk)
-					h.update(chunk)
-					progress.update(task, advance = len(chunk))
-
-	digest = h.hexdigest()
-
-	log.debug(f'Downloaded \'{dest.name}\'')
-	if checksum is not None:
-		log.debug('Checking digest...')
-		if digest != checksum:
-			log.error(f'File checksum failed! got: {digest} wanted: {checksum}')
-			return False
-	else:
-		log.debug(f'sha512sum: {digest}')
-	return True
 
 
 def _cmp_dl_path(comp: str, ver: str, fname: str) -> Path:
@@ -77,13 +33,13 @@ class ComponentsAction(XCBuildAction):
 	description = ''
 
 	def _download(self, args: argparse.Namespace) -> int:
-		do_dryrun: bool = args.dryrun
-		dl_all: bool    = args.all
-		dl_skip: bool   = args.skip_checksum
+		do_dryrun: bool  = args.dryrun
+		dl_all: bool     = args.all
+		dl_skip: bool    = args.skip_checksum
+		dl_clobber: bool = args.clobber
+		dl_jobs: int     = args.concurrent_jobs
 
 		dl_targets = list()
-
-
 		for name, details in self.components.items():
 			dl_url = f'{details["url"]}/{details["filename"]}'
 
@@ -112,15 +68,15 @@ class ComponentsAction(XCBuildAction):
 				)
 
 		log.info(f'{len(dl_targets)} components selected for download...')
+
 		if do_dryrun:
 			log.info('Performing dry run')
-
-		for url, p, chcksm in dl_targets:
-			if do_dryrun:
+			for url, p, chcksm in dl_targets:
 				log.info(f'{url} => {p} (sha512sum: {chcksm})')
-			else:
-				_download_file(url, p, None if dl_skip else chcksm)
-
+		else:
+			if dl_skip:
+				dl_targets = list(map(lambda t: (t[0], t[1], None), dl_targets))
+			download_files(dl_targets, dl_clobber, dl_jobs)
 
 		return 0
 
@@ -212,6 +168,20 @@ class ComponentsAction(XCBuildAction):
 			action  = 'store_true',
 			default = False,
 			help    = 'Don\'t actually download the files, just print the URLs.'
+		)
+
+		dl_action.add_argument(
+			'--clobber', '-c',
+			action  = 'store_true',
+			default = False,
+			help    = 'Clobber already downloaded files'
+		)
+
+		dl_action.add_argument(
+			'--concurrent-jobs', '-j',
+			type    = int,
+			default = 4,
+			help    = 'Number of concurrent downloads to run (default: 4)'
 		)
 
 		ex_action = subactions.add_parser(

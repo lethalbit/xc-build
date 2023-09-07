@@ -241,9 +241,3 @@ def expand_variables(input_text: Union[str, StringIO], variables: dict[str, str]
 	res = obuff.getvalue()
 	obuff.close()
 	return res
-
-
-if __name__ == '__main__':
-	txt = 'https://cdn.kernel.org/pub/linux/kernel/v${VERSION:0:1}.x/linux-${VERSION}.tar.xz'
-	v = { 'VERSION': '6.4.12' }
-	print(expand_variables(txt, v))

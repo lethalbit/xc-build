@@ -4,6 +4,8 @@ from pathlib            import Path
 from typing             import Optional, Iterable
 from hashlib            import sha512
 from concurrent.futures import ThreadPoolExecutor
+from itertools          import islice
+
 
 import requests
 import rich.progress    as pb
@@ -13,29 +15,29 @@ __all__ = (
 	'download_files',
 )
 
-
-
 def download_files(
-		files: Iterable[tuple[str, Path, Optional[str]]], clobber: bool = False, concurrent: int = 4
+		files: Iterable[tuple[str, Path, Optional[str]]], clobber: bool = False, concurrent: int = 4,
+		progress: Optional[pb.Progress] = None
 ) -> bool:
-
-	progress = pb.Progress(
-		pb.TextColumn('Downloading [bold blue]{task.fields[filename]: <23}', justify = 'left'),
-		pb.BarColumn(),
-		'[progress.percentage]{task.percentage:>3.1f}%',
-		pb.DownloadColumn(),
-		pb.TransferSpeedColumn(),
-		pb.TimeRemainingColumn()
-	)
+	if progress is None:
+		progress = pb.Progress(
+			pb.TextColumn('Downloading [bold blue]{task.fields[filename]: <23}', justify = 'left'),
+			pb.BarColumn(),
+			'[progress.percentage]{task.percentage:>3.1f}%',
+			pb.DownloadColumn(),
+			pb.TransferSpeedColumn(),
+			pb.TimeRemainingColumn()
+		)
 
 	def _download(
 		task: pb.TaskID, url: str, dest: Path, clobber: bool = False, checksum: Optional[str] = None
 	) -> tuple[pb.TaskID, bool]:
+		digest = ''
+
 		if dest.exists() and not clobber:
 			log.info(f'Already have {dest}, skipping')
-			return True
-
-		digest = ''
+			progress.remove_task(task)
+			return (task, True)
 
 		with requests.get(url, allow_redirects = True) as r:
 			h = sha512()
@@ -53,9 +55,11 @@ def download_files(
 			log.debug('Checking digest...')
 			if digest != checksum:
 				log.error(f'File checksum failed! got: {digest} wanted: {checksum}')
+				progress.remove_task(task)
 				return (task, False)
 		else:
 			log.debug(f'sha512sum: {digest}')
+		progress.remove_task(task)
 		return (task, True)
 
 	if len(files) == 0:

@@ -1,19 +1,18 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 import argparse
-import tarfile
-import logging   as log
-from pathlib     import Path
+import logging        as log
+from pathlib          import Path
 
-from rich        import print
-from rich.tree   import Tree
+from rich             import print
+from rich.tree        import Tree
 
-from .           import XCBuildAction
-from ..strutils  import expand_variables
-from ..netutils  import download_files
+from .                import XCBuildAction
+from ..core.strutils  import expand_variables
+from ..core.netutils  import download_files
 from ..data      import get_components
-from ..config    import (
-	XC_BUILD_CONFIG,
+from ..data           import get_components
+from ..config         import (
 	SOURCE_DIR,
 	DLD_DIR,
 )
@@ -38,8 +37,9 @@ class ComponentsAction(XCBuildAction):
 		dl_skip: bool    = args.skip_checksum
 		dl_clobber: bool = args.clobber
 		dl_jobs: int     = args.concurrent_jobs
-
 		dl_targets = list()
+
+		log.info('Downloading components...')
 		for name, details in self.components.items():
 			dl_url = f'{details["url"]}/{details["filename"]}'
 
@@ -73,12 +73,12 @@ class ComponentsAction(XCBuildAction):
 			log.info('Performing dry run')
 			for url, p, chcksm in dl_targets:
 				log.info(f'{url} => {p} (sha512sum: {chcksm})')
+			return 0
 		else:
 			if dl_skip:
 				dl_targets = list(map(lambda t: (t[0], t[1], None), dl_targets))
-			download_files(dl_targets, dl_clobber, dl_jobs)
+			return download_files(dl_targets, dl_clobber, dl_jobs)
 
-		return 0
 
 	def _extract(self, args: argparse.Namespace) -> int:
 		def _strip_path(tar: tarfile.TarFile):

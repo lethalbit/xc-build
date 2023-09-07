@@ -3,8 +3,13 @@
 import argparse
 import logging        as log
 
+from pathlib          import Path
+from shutil           import rmtree
+
 from rich             import print
+from rich.prompt      import Confirm
 from rich.tree        import Tree
+from rich.progress    import track
 
 from .                import XCBuildAction
 from ..core.netutils  import download_files
@@ -81,6 +86,23 @@ class ComponentsAction(XCBuildAction):
 		return 0
 
 	def _rm(self, args: argparse.Namespace) -> int:
+		rm_all:     bool = args.all
+		rm_archive: bool = args.remove_archives
+
+		targets = get_paths(self.components, rm_all)
+
+		if Confirm.ask(f'You are about to remove {len(targets)} components, are you sure?', default = 'n'):
+			for t in track(targets, description = 'Deleting components...'):
+				archive: Path = t['archive_path']
+				sources: Path = t['source_path']
+
+				if archive.exists() and rm_archive:
+					log.debug(f'removing {archive}')
+					archive.unlink()
+
+				if sources.exists():
+					log.debug(f'removing {sources}')
+					rmtree(sources)
 
 		return 0
 
@@ -182,6 +204,20 @@ class ComponentsAction(XCBuildAction):
 		rm_action = subactions.add_parser(
 			'rm',
 			help = 'Remove component sources'
+		)
+
+		rm_action.add_argument(
+			'--all', '-a',
+			action  = 'store_true',
+			default = False,
+			help    = 'Remove all components, not just the latest'
+		)
+
+		rm_action.add_argument(
+			'--remove-archives', '-A',
+			action  = 'store_true',
+			default = False,
+			help    = 'Also remove the downloaded component archive, not just the source dir'
 		)
 
 	def run(self, args: argparse.Namespace) -> int:

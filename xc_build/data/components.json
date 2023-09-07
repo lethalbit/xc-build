@@ -108,6 +108,36 @@
 				}
 			}
 		},
+		"isl": {
+			"url": "https://gcc.gnu.org/pub/gcc/infrastructure/",
+			"filename": "isl-${VERSION}.tar.bz2",
+			"latest": "0.24",
+			"versions": [
+				{ "version": "0.24",   "sha512sum": "aab3bddbda96b801d0f56d2869f943157aad52a6f6e6a61745edd740234c635c38231af20bc3f1a08d416a5e973a90e18249078ed8e4ae2f1d5de57658738e95" },
+				{ "version": "0.18",   "sha512sum": "85d0b40f4dbf14cb99d17aa07048cdcab2dc3eb527d2fbb1e84c41b2de5f351025370e57448b63b2b8a8cf8a0843a089c3263f9baee1542d5c2e1cb37ed39d94" },
+				{ "version": "0.16.1", "sha512sum": "c188667a84dc5bdddb4ab7c35f89c91bf15a8171f4fcaf41301cf285fb7328846d9a367c096012fec4cc69d244f0bc9e95d84c09ec097394cd4093076f2a041b" },
+				{ "version": "0.15",   "sha512sum": "1e27b7798f7428abcb5e9b2e3fbe3842fede54c03bbd7bd3cf83703e1e4cca7d95c51326ab90253fe55b38c002183e8e78dfbb4d2cf20b0aabe02443c8e7d50f" },
+				{ "version": "0.14",   "sha512sum": "117c0c6f31d91a9284a8f54a748df6494ca2ac21507a45611e911403e9610579b9323ce624aea1de0b8089b3194e59d4364f01bdb71ddcf8f6c24c749d11c4b7" },
+				{ "version": "0.12.2", "sha512sum": "b5dea4d6b504fac22f2d8cd9c47d6896994d3966635a514d45010243db44cfbc009574b808f3587f35d91de629110bc11b52941d4075e21f8646c59656e62aea" },
+				{ "version": "0.11.1", "sha512sum": "f021ef6982b30a4834bc459af3520bd74b9c6af3e479b344c2d0e1bb4550b85cd30612e342ac761d85f1d2e2160ab3183e1252696726f438e61fb070a7a7bd22" }
+			],
+			"flags": {
+				"latest": {
+					"configure": [
+						"--prefix=${COMMON_PREFIX}"
+					],
+					"ld_library_path": [
+						"${COMMON_PREFIX}/lib"
+					],
+					"ldflags": [
+						"-Wl,-rpath,${COMMON_PREFIX}/lib"
+					],
+					"ldflags_build": [],
+					"cflags": [],
+					"cxxflags": []
+				}
+			}
+		},
 		"binutils": {
 			"url": "https://ftp.gnu.org/gnu/binutils",
 			"filename": "binutils-${VERSION}.tar.xz",

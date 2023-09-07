@@ -7,16 +7,10 @@ from rich             import print
 from rich.tree        import Tree
 
 from .                import XCBuildAction
-from ..core.strutils  import expand_variables
 from ..core.netutils  import download_files
 from ..core.fileutils import extract_files
-from ..data           import (
-	load_components,
-	component_archive_path, component_source_path
-)
-from ..config         import (
-	DLD_DIR,
-)
+from ..data           import load_components, get_paths, component_archive_path
+
 
 __all__ = (
 	'ComponentsAction',
@@ -29,79 +23,38 @@ class ComponentsAction(XCBuildAction):
 	description = ''
 
 	def _download(self, args: argparse.Namespace) -> int:
-		do_dryrun: bool  = args.dryrun
 		dl_all: bool     = args.all
 		dl_skip: bool    = args.skip_checksum
 		dl_clobber: bool = args.clobber
 		dl_jobs: int     = args.concurrent_jobs
-		dl_targets = list()
 
 		log.info('Downloading components...')
-		for name, details in self.components.items():
-			dl_url = f'{details["url"]}/{details["filename"]}'
-
-			if not (DLD_DIR / name).exists():
-				(DLD_DIR / name).mkdir(parents = True, exist_ok = True)
-
-			if dl_all:
-				for v in details['versions']:
-					dl_targets.append(
-						(
-							expand_variables(dl_url, { 'VERSION': v['version'] }),
-							component_archive_path(name, v['version'], details['filename']),
-							v['sha512sum']
-						)
-					)
-			else:
-				dl_targets.append(
-					(
-						expand_variables(dl_url, { 'VERSION': details['latest'] }),
-						component_archive_path(name, details['latest'], details['filename']),
-						list(filter(
-							lambda v: v['version'] == details['latest'],
-							details['versions']
-						))[0]['sha512sum']
-					)
-				)
+		dl_targets = get_paths(self.components, dl_all)
 
 		log.info(f'{len(dl_targets)} components selected for download...')
 
-		if do_dryrun:
-			log.info('Performing dry run')
-			for url, p, chcksm in dl_targets:
-				log.info(f'{url} => {p} (sha512sum: {chcksm})')
-			return 0
-		else:
-			if dl_skip:
-				dl_targets = list(map(lambda t: (t[0], t[1], None), dl_targets))
-			return download_files(dl_targets, dl_clobber, dl_jobs)
+		return download_files(
+			map(
+				lambda t: (t['url'], t['archive_path'], t['sha512sum']),
+				dl_targets,
+			), dl_clobber, dl_jobs, dl_skip
+		)
 
 
 	def _extract(self, args: argparse.Namespace) -> int:
 		ex_all: bool     = args.all
 		ex_clobber: bool = args.clobber
 		ex_jobs: int     = args.concurrent_jobs
-		archives = list()
 
 		log.info('Extracting components...')
-		for name, details in self.components.items():
-			if ex_all:
-				for v in details['versions']:
-					archives.append(
-						(
-							component_archive_path(name, v['version'], details['filename']),
-							component_source_path(name, v['version'])
-						)
-					)
-			else:
-				archives.append(
-					(
-						component_archive_path(name, details['latest'], details['filename']),
-						component_source_path(name, details['latest'])
-					)
-				)
+		archives = get_paths(self.components, ex_all)
 
-		return extract_files(archives, ex_clobber, ex_jobs)
+		return extract_files(
+			map(
+				lambda a: (a['archive_path'], a['source_path']),
+				archives,
+			), ex_clobber, ex_jobs
+		)
 
 	def _show(self, args: argparse.Namespace) -> int:
 		sh_all: bool = args.all

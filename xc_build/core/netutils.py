@@ -17,7 +17,7 @@ __all__ = (
 
 def download_files(
 		files: Iterable[tuple[str, Path, Optional[str]]], clobber: bool = False, concurrent: int = 4,
-		skip_checksums: bool = False, progress: Optional[pb.Progress] = None
+		skip_checksums: bool = False, mkdir: bool = True, progress: Optional[pb.Progress] = None
 ) -> bool:
 	if progress is None:
 		progress = pb.Progress(
@@ -30,9 +30,13 @@ def download_files(
 		)
 
 	def _download(
-		task: pb.TaskID, url: str, dest: Path, clobber: bool = False, checksum: Optional[str] = None
+		task: pb.TaskID, url: str, dest: Path, clobber: bool = False, mkdir: bool = True,
+		checksum: Optional[str] = None
 	) -> tuple[pb.TaskID, bool]:
 		digest = ''
+
+		if mkdir and not dest.parent.exists():
+			dest.parent.mkdir(exist_ok = True, parents = True)
 
 		if dest.exists() and not clobber:
 			log.info(f'Already have {dest}, skipping')
@@ -70,7 +74,7 @@ def download_files(
 					'Downloading', filename = f'{dest.parent.name}/{dest.name}', start = False
 				)
 				futures.append(pool.submit(
-					_download, task, url, dest, clobber, None if skip_checksums else checksum
+					_download, task, url, dest, clobber, mkdir, None if skip_checksums else checksum
 				))
 
 	return all(map(lambda f: f.result()[0], futures))

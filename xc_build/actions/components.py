@@ -10,7 +10,7 @@ from rich.tree        import Tree
 from .                import XCBuildAction
 from ..core.strutils  import expand_variables
 from ..core.netutils  import download_files
-from ..data      import get_components
+from ..core.fileutils import extract_files
 from ..data           import get_components
 from ..config         import (
 	SOURCE_DIR,
@@ -24,6 +24,9 @@ __all__ = (
 
 def _cmp_dl_path(comp: str, ver: str, fname: str) -> Path:
 	return ((DLD_DIR / comp) / f'{ver}{"".join(Path(fname).suffixes)}')
+
+def _cmp_src_path(comp: str, ver: str) -> Path:
+	return ((SOURCE_DIR / comp) / ver)
 
 class ComponentsAction(XCBuildAction):
 	pretty_name = 'components'
@@ -81,29 +84,30 @@ class ComponentsAction(XCBuildAction):
 
 
 	def _extract(self, args: argparse.Namespace) -> int:
-		def _strip_path(tar: tarfile.TarFile):
-			files = list()
-			for m in tar.getmembers():
-				p = Path(m.path)
-				m.path = Path(*p.parts[1:])
-				files.append(m)
-			return files
+		ex_all: bool     = args.all
+		ex_clobber: bool = args.clobber
+		ex_jobs: int     = args.concurrent_jobs
+		archives = list()
 
+		log.info('Extracting components...')
 		for name, details in self.components.items():
-			cmpt_dir: Path = (SOURCE_DIR / name)
+			if ex_all:
+				for v in details['versions']:
+					archives.append(
+						(
+							_cmp_dl_path(name, v['version'], details['filename']),
+							_cmp_src_path(name, v['version'])
+						)
+					)
+			else:
+				archives.append(
+					(
+						_cmp_dl_path(name, details['latest'], details['filename']),
+						_cmp_src_path(name, details['latest'])
+					)
+				)
 
-			if not cmpt_dir.exists():
-				cmpt_dir.mkdir(parents = True, exist_ok = True)
-
-			for v in details['versions']:
-				cmpt = _cmp_dl_path(name, v['version'], details['filename'])
-				if cmpt.exists():
-					log.info(f'Extracting {name}/{cmpt.name} to {cmpt_dir}')
-					with tarfile.open(cmpt, 'r:*') as tar:
-						tar.extractall(cmpt_dir / v['version'], members = _strip_path(tar))
-
-
-		return 0
+		return extract_files(archives, ex_clobber, ex_jobs)
 
 	def _show(self, args: argparse.Namespace) -> int:
 		sh_all: bool = args.all
@@ -193,6 +197,27 @@ class ComponentsAction(XCBuildAction):
 		ex_action = subactions.add_parser(
 			'extract',
 			help = 'Unpack the component sources'
+		)
+
+		ex_action.add_argument(
+			'--clobber', '-c',
+			action  = 'store_true',
+			default = False,
+			help    = 'Clobber already extracted archives'
+		)
+
+		ex_action.add_argument(
+			'--concurrent-jobs', '-j',
+			type    = int,
+			default = 4,
+			help    = 'Number of concurrent extractions to run (default: 4)'
+		)
+
+		ex_action.add_argument(
+			'--all', '-a',
+			action  = 'store_true',
+			default = False,
+			help    = 'Extract all archives, not just the latest'
 		)
 
 		sh_action = subactions.add_parser(

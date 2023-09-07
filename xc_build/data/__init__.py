@@ -4,8 +4,10 @@ import json
 from importlib import resources
 
 __all__ = (
-    'get_components',
+    'load_components',
 )
 
-def get_components() -> dict:
-    return json.loads(resources.read_text(__name__, 'components.json'))
+def load_components() -> dict:
+    return json.loads(
+        resources.read_text(__name__, 'components.json')
+    )['components']

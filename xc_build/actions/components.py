@@ -11,7 +11,7 @@ from .                import XCBuildAction
 from ..core.strutils  import expand_variables
 from ..core.netutils  import download_files
 from ..core.fileutils import extract_files
-from ..data           import get_components
+from ..data           import load_components
 from ..config         import (
 	SOURCE_DIR,
 	DLD_DIR,
@@ -146,7 +146,7 @@ class ComponentsAction(XCBuildAction):
 			'show'    : self._show,
 			'rm'      : self._rm,
 		}
-		self.components = get_components()['components']
+		self.components = load_components()
 
 	def register_args(self, parser: argparse.ArgumentParser) -> None:
 		subactions = parser.add_subparsers(

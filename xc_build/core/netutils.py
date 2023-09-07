@@ -17,7 +17,7 @@ __all__ = (
 
 def download_files(
 		files: Iterable[tuple[str, Path, Optional[str]]], clobber: bool = False, concurrent: int = 4,
-		progress: Optional[pb.Progress] = None
+		skip_checksums: bool = False, progress: Optional[pb.Progress] = None
 ) -> bool:
 	if progress is None:
 		progress = pb.Progress(
@@ -62,9 +62,6 @@ def download_files(
 		progress.remove_task(task)
 		return (task, True)
 
-	if len(files) == 0:
-		return True
-
 	futures = list()
 	with progress:
 		with ThreadPoolExecutor(max_workers = concurrent) as pool:
@@ -73,7 +70,7 @@ def download_files(
 					'Downloading', filename = f'{dest.parent.name}/{dest.name}', start = False
 				)
 				futures.append(pool.submit(
-					_download, task, url, dest, clobber, checksum
+					_download, task, url, dest, clobber, None if skip_checksums else checksum
 				))
 
 	return all(map(lambda f: f.result()[0], futures))

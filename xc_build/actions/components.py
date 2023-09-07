@@ -2,7 +2,6 @@
 
 import argparse
 import logging        as log
-from pathlib          import Path
 
 from rich             import print
 from rich.tree        import Tree
@@ -11,22 +10,17 @@ from .                import XCBuildAction
 from ..core.strutils  import expand_variables
 from ..core.netutils  import download_files
 from ..core.fileutils import extract_files
-from ..data           import load_components
+from ..data           import (
+	load_components,
+	component_archive_path, component_source_path
+)
 from ..config         import (
-	SOURCE_DIR,
 	DLD_DIR,
 )
 
 __all__ = (
 	'ComponentsAction',
 )
-
-
-def _cmp_dl_path(comp: str, ver: str, fname: str) -> Path:
-	return ((DLD_DIR / comp) / f'{ver}{"".join(Path(fname).suffixes)}')
-
-def _cmp_src_path(comp: str, ver: str) -> Path:
-	return ((SOURCE_DIR / comp) / ver)
 
 class ComponentsAction(XCBuildAction):
 	pretty_name = 'components'
@@ -54,7 +48,7 @@ class ComponentsAction(XCBuildAction):
 					dl_targets.append(
 						(
 							expand_variables(dl_url, { 'VERSION': v['version'] }),
-							_cmp_dl_path(name, v['version'], details['filename']),
+							component_archive_path(name, v['version'], details['filename']),
 							v['sha512sum']
 						)
 					)
@@ -62,7 +56,7 @@ class ComponentsAction(XCBuildAction):
 				dl_targets.append(
 					(
 						expand_variables(dl_url, { 'VERSION': details['latest'] }),
-						_cmp_dl_path(name, details['latest'], details['filename']),
+						component_archive_path(name, details['latest'], details['filename']),
 						list(filter(
 							lambda v: v['version'] == details['latest'],
 							details['versions']
@@ -95,15 +89,15 @@ class ComponentsAction(XCBuildAction):
 				for v in details['versions']:
 					archives.append(
 						(
-							_cmp_dl_path(name, v['version'], details['filename']),
-							_cmp_src_path(name, v['version'])
+							component_archive_path(name, v['version'], details['filename']),
+							component_source_path(name, v['version'])
 						)
 					)
 			else:
 				archives.append(
 					(
-						_cmp_dl_path(name, details['latest'], details['filename']),
-						_cmp_src_path(name, details['latest'])
+						component_archive_path(name, details['latest'], details['filename']),
+						component_source_path(name, details['latest'])
 					)
 				)
 
@@ -123,10 +117,10 @@ class ComponentsAction(XCBuildAction):
 			if sh_all:
 				versions = node.add('Versions')
 				for v in details['versions']:
-					have = _cmp_dl_path(name, v['version'], details['filename']).exists()
+					have = component_archive_path(name, v['version'], details['filename']).exists()
 					versions.add(f'{v["version"]: <8}{" - Downloaded" if have else ""}')
 			else:
-				have = _cmp_dl_path(name, details['latest'], details['filename']).exists()
+				have = component_archive_path(name, details['latest'], details['filename']).exists()
 				node.add(f'Downloaded: { "✔️" if have else "✖️"}')
 
 		print(tree)
